@@ -8,7 +8,7 @@ use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
 
 
 class AdminController extends Controller
@@ -38,12 +38,16 @@ class AdminController extends Controller
         //}
 
 
-    	$userCheck=Admin::where(['email'=>$request->email,'password'=>$request->password])->count();
+    	$userCheck=Admin::where(['email'=>$request->email])->count();
         //dd($userCheck);
     	if(($userCheck > 0)){
-    	   $adminData=Admin::where(['email'=>$request->email,'password'=>$request->password])->first();
-    	   $request->session()->put('adminData',$adminData);
-    	   return redirect('admin/dashboard');
+    	   $adminData=Admin::where(['email'=>$request->email])->first();
+           if(Hash::check($request->password,$adminData->password)){
+                $request->session()->put('adminData',$adminData);
+                return redirect('admin/dashboard'); 
+           }else{
+                return redirect('admin/login')->with('error','Account is not valid');     
+           }
     	}else{
     	   return redirect('admin/login')->with('error','Account is not valid');
     	}

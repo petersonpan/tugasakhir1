@@ -35,12 +35,13 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         //
+        $menu_active=$this->menu_active[0];
         $url=$request->path();
         $url=explode('/', $url);
         $url=$url[2];
         $productsatuan=Satuan::all();
         $categories=Category::where('parent_id',0)->pluck('name','id')->all();
-        return view('backend.products.create',compact('url','categories','productsatuan'));
+        return view('backend.products.create',compact('url','categories','productsatuan','menu_active'));
     }
 
     /**

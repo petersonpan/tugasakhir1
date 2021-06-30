@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
+
+    public $menu_active=[0=>"products"];
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +22,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $menu_active=$this->menu_active[0];
         $products=Product::latest()->paginate(5);
-        return view('backend.products.index',compact('products'))->with('i',(request()->input('page',1)-1)*5);
+        return view('backend.products.index',compact('products','menu_active'))->with('i',(request()->input('page',1)-1)*5);
     }
 
     /**
@@ -54,6 +57,7 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required',
             'code' => 'required',
+            'category'=>'required',
             'postImage' => 'required|mimes:jpg,jpeg,png|max:8000'            
         ]);
         //Product::create($request->all());
@@ -99,10 +103,11 @@ class ProductController extends Controller
     public function show(Product $product,Request $request)
     {
         //
+        $menu_active=$this->menu_active[0];
         $uri=$request->path();
         $uri=explode('/', $uri);
         $uri=$uri[1];
-        return view('backend.products.show',compact('product','uri'));
+        return view('backend.products.show',compact('product','uri','menu_active'));
     }
 
     /**
@@ -114,13 +119,14 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
+        $menu_active=$this->menu_active[0];
         $category=Category::where('parent_id',0)->pluck('name','id')->all();
         $product=Product::findOrFail($id);
         //dd($product);
         $prodsatuan=Satuan::findOrFail($product->satuan_id);
         $satuan=Satuan::all();
         $edit_category=Category::findOrFail($product->cat_id);
-        return view('backend.products.edit',compact('product','category','edit_category','prodsatuan','satuan'));
+        return view('backend.products.edit',compact('product','category','edit_category','prodsatuan','satuan','menu_active'));
     }
 
     /**

@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6 col-sm-12 col-12">
           <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title">Product </h3>
@@ -89,8 +89,8 @@
               </div>
             </div>
             <div class="card-body">
-              <form action="{{route('product_attr.update',$product->id)}}" method="POST" enctype="multipart/form-data">
-              @csrf
+              <!-- <form action="{{route('product_attr.update',$product->id)}}" method="POST" enctype="multipart/form-data">
+              @csrf -->
               <table id="example1" class="table table-bordered">
                               <thead>
                                 <tr>
@@ -124,6 +124,7 @@
                                 @endif
                               </tbody>
               </table>
+              <!-- <button type="submit" class="btn btn-success">Add</button> -->
             </form>
             </div>
             <!-- /.card-body -->

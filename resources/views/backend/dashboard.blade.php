@@ -73,6 +73,7 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @if(count($products) > 0)
                     @php
                     $i=0;
                     @endphp
@@ -98,6 +99,11 @@
                             </td>
                         </tr>
                     @endforeach
+                    @else
+                    <tr>
+                      <td colspan="6" class="text-center">EOD</td>
+                    </tr>
+                    @endif
                   </tbody>
                 </table>
               </div>
@@ -113,7 +119,7 @@
                 <h3 class="card-title">Product Category</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0">
+              <div class="card-body">
                 <table class="table table-bordered">
                   <thead>
                     <tr>
@@ -125,10 +131,11 @@
                     </tr>
                   </thead>
                   <tbody>
-          @if(count($categories) > 0)    
+          @if(count($categories) > 0)
+          @php $j=0; @endphp    
               @foreach($categories as $category)
             <tr>
-                <td>{{++$i}}</td>
+                <td>{{++$j}}</td>
                 <td>{{$category->name}}</td>
                 <td>{{$category->description}}</td>
                 <td>{{date_format($category->created_at,'jS M Y')}}</td>
@@ -149,7 +156,7 @@
         @endforeach
     @else
         <tr>
-            <td colspan="5">EOD</td>
+            <td colspan="5" class="text-center">EOD</td>
         </tr>
     @endif
                   </tbody>

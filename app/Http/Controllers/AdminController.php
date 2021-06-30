@@ -7,14 +7,14 @@ use App\Models\Product;
 use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Auth;
+
 
 
 class AdminController extends Controller
 {
 
-    // public function index(){
-    //     return view('backend.login');
-    // }
+    public $menu_active=[0=>"active",1=>"admin"];
 
     public function login(){
     	return view('backend.login');
@@ -22,43 +22,53 @@ class AdminController extends Controller
 
     //submit_login
     public function submit_login(Request $request){
-    	$request->validate([
-    		'username' => 'required','password'=>'required'
-    	]);
+    	// $request->validate([
+    	// 	'username' => 'required','password'=>'required'
+    	// ]);
+        $request->validate([
+            'email' => 'required','password'=>'required'
+        ]);
 
-    	$userCheck=Admin::where(['username'=>$request->username,'password'=>$request->password])->count();
+         // if(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'admin'=>'1'])){
+            //Session::put('adminData',$input_data['email']);
+        //     $request->session()->put('email',$request->email);
+        //     return redirect('admin/dashboard');
+        // }else{
+        //     return redirect('admin/login')->with('error','Account is not Valid!');
+        //}
 
-    	if($userCheck > 0){
-    	   $adminData=Admin::where(['username'=>$request->username,'password'=>$request->password])->first();
+
+    	$userCheck=Admin::where(['email'=>$request->email,'password'=>$request->password])->count();
+        //dd($userCheck);
+    	if(($userCheck > 0)){
+    	   $adminData=Admin::where(['email'=>$request->email,'password'=>$request->password])->first();
     	   $request->session()->put('adminData',$adminData);
     	   return redirect('admin/dashboard');
     	}else{
-    	   return redirect('admin/login')->with('error','invalid username/password');
+    	   return redirect('admin/login')->with('error','Account is not valid');
     	}
+
     }
 
-    public function users(){
-        $data=User::orderBy('id','desc')->paginate(5);
-        return view('backend.users.index',['data'=>$data])->with('i',(request()->input('page',1)-1)*5);
+
+
+    public function adminview(){
+        $menu_active=$this->menu_active;
+        $dataview=Admin::orderBy('id','desc')->paginate(5);
+        return view('backend.users.adminindex',['dataview'=>$dataview,'menu_active'=>$menu_active])->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function dashboard(){
-
+            $menu_active=$this->menu_active[0];
     		$products=Product::latest()->paginate(5);
     		$categories=Category::latest()->paginate(5);
-    		//$loggedAdminInfo=Admin::where('id','=',session('adminData'))->first();
-    		// $data = [
-    		// 	'loggedAdminInfo'=>$user
-    		// ];	
-    		//return view('backend.dashboard',$data);
-    		return view('backend.dashboard',compact('products','categories'))->with('i',(request()->input('page',1)-1)*5);
+    		return view('backend.dashboard',compact('products','categories','menu_active'))->with('i',(request()->input('page',1)-1)*5);
     }
 
-    public function logout(){
-    	if(session()->has('adminData')){
+    public function logout(){    
     		session()->forget([
     		'adminData']);
+            //Auth::logout();
     		return redirect('admin/login');
-    	}
     }
 }

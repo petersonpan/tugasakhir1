@@ -123,8 +123,9 @@
                 </div>
               <div class="row">
                 <div class="col-12">
+
                   <a href="{{route('products.index')}}" class="btn btn-secondary float-right">Cancel</a>
-                  <input type="hidden" name="userid" value="{{session('adminData')->id}}">
+                  <input type="hidden" name="userid" value="{{Session::get('adminData')->id}}">
                   <input type="submit" value="Save Changes" class="btn btn-success float-left">
                 </div>
               </div>

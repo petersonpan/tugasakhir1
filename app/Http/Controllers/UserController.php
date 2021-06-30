@@ -11,9 +11,12 @@ use App\Models\Role;
 class UserController extends Controller
 {
     //
+    public $menu_active=[0=>"active",1=>"user"];
+
     public function index(){
+        $menu_active=$this->menu_active;    
     	$data=User::orderBy('id','desc')->paginate(5);
-        return view('backend.users.index',['data'=>$data])->with('i',(request()->input('page',1)-1)*5);
+        return view('backend.users.index',['data'=>$data,'menu_active'=>$menu_active])->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function create(Request $request){
@@ -41,7 +44,6 @@ class UserController extends Controller
     	if($request->role!=null){
     		$user->roles()->attach($request->role);
     		$user->save;
-
     	}
 
     	if($request->permissions != null){

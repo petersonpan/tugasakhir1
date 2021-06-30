@@ -9,6 +9,7 @@ class CategoryController extends Controller
 {
 
     public $title=["index","create","edit","show"];
+    public $menu_active=[0=>'category'];
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +19,10 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $title=$this->title[0];
+        $title=$this->title[1];
+        $menu_active=$this->menu_active[0];
         $categories=Category::latest()->paginate(5);
-        return view('backend.categories.index',compact('categories','title'))->with('i',(request()->input('page',1)-1)*5);
+        return view('backend.categories.index',compact('categories','title','menu_active'))->with('i',(request()->input('page',1)-1)*5);
         
     }
 
@@ -35,11 +37,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $menu_active=$this->menu_active[0];
         $plucked=Category::where('parent_id',0)->pluck('name','id');
         
         $cate_levels=['0'=>'Main Category']+$plucked->all();
         // $subCategory=DB::table('categories')->select('id','name')->where('parent_id',$key)->get();
-        return view('backend.categories.create',compact('cate_levels'));
+        return view('backend.categories.create',compact('cate_levels','menu_active'));
     }
 
     /**
@@ -70,8 +73,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
+        $menu_active=$this->menu_active;    
         $categories=Category::find($id);
-        return view('backend.categories.show',compact('categories'));
+        return view('backend.categories.show',compact('categories','menu_active'));
     }
 
     /**
@@ -84,12 +88,12 @@ class CategoryController extends Controller
     {
         //
         $title=$this->title[2];
-        
+        $menu_active=$this->menu_active[0];
         $plucked=Category::where('parent_id',0)->pluck('name','id');
         $cate_levels=['0'=>'Main Category']+$plucked->all();
 
         $category=Category::findorFail($id);
-        return view('backend.categories.edit',compact('category','title','cate_levels'));
+        return view('backend.categories.edit',compact('category','title','cate_levels','menu_active'));
     }
 
     /**

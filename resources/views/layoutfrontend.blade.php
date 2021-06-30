@@ -32,19 +32,23 @@
 		        <a class="nav-link" href="{{url('register')}}">Register</a>
 		      </li>
 		      @else
-		      <li class="nav-item">
+		      <!-- <li class="nav-item">
 		        <a class="nav-link" href="">Add Post</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="">Manage Posts</a>
-		      </li>
+		      </li> -->
 		      <li class="nav-item">
 		        <a class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="{{url('logout')}}">Logout</a>
 		      </li>
 		      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             	</form>
+            	<li class="nav-item">
+		        <a class="nav-link" href="">{{ Auth::user()->name }}</a>
+		      </li>
 		      @endguest
+
 		    </ul>
 		  </div>
 		</div>

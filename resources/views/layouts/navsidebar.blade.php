@@ -27,7 +27,7 @@
             </ul>
           </li> -->
           <li class="nav-item">
-            <a href="{{url('admin/products')}}" class="nav-link">
+            <a href="{{url('admin/products')}}" class="nav-link {{$menu_active == 'products' ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Product
@@ -36,7 +36,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('admin/categories/')}}" class="nav-link">
+            <a href="{{url('admin/categories/')}}" class="nav-link {{$menu_active == 'category' ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Category
@@ -53,7 +53,8 @@
               </p>
             </a>
           </li> -->
-          <li class="nav-item has-treeview">
+
+          <li class="nav-item has-treeview {{$menu_active[0] == 'active' ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
@@ -63,13 +64,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{url('admin/view')}}" class="nav-link {{$menu_active[1] == 'admin' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Admin</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('admin/user/')}}" class="nav-link">
+                <a href="{{url('admin/user/')}}" class="nav-link {{$menu_active[1] == 'user' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>User</p>
                 </a>

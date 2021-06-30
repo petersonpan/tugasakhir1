@@ -41,6 +41,7 @@
                                   <th>Name</th>
                                   <th>description</th>
                                   <th>Date Created</th>
+                                  <th>&nbsp;</th>
                                   <th>Actions</th>
                                 </tr>
                               </thead>
@@ -52,9 +53,10 @@
                                             <td>{{$product->name}}</td>
                                             <td>{{$product->description}}</td>
                                             <td>{{date_format($product->created_at,'jS M Y')}}</td>
+                                            <td class="text-center"><a href="{{route('product_attr.show',$product->id)}}" class="btn btn-primary" title="add attibute product">add attibute product</a></td>
                                             <td>
                                                 <form action="{{route('products.destroy',$product->id)}}" method="POST">
-                            <a href="{{route('product_attr.show',$product->id)}}" title="show"><i class="fas fa-eye text-danger fa-lg"></i></a>
+                            
                                                     <a href="{{route('products.show',$product->id)}}" title="show"><i class="fas fa-eye text-success fa-lg"></i></a>
                                                     <a href="{{route('products.edit',$product->id)}}">
                                                         <i class="fas fa-edit  fa-lg"></i>

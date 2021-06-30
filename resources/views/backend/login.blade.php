@@ -33,17 +33,17 @@
         <p class="login-box-msg session">Sign in to start your session</p>
       @endif
       
-      <form method="post" action="{{route('auth.check')}}">
+      <form method="post" action="{{route('adminauth.check')}}">
         @csrf
         <div class="input-group mb-3">
-          <input type="text" name="username" class="form-control" placeholder="Username">
+          <input type="text" name="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
-        <span class="text-danger">@error('username') {{$message}} @enderror</span>
+        <span class="text-danger">@error('email') {{$message}} @enderror</span>
         <div class="input-group mb-3">
           <input type="password" name="password" class="form-control" placeholder="Password">
           <div class="input-group-append">

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class ProductAttrController extends Controller
 {
+    public $menu_active=[0=>"products"];
     /**
      * Display a listing of the resource.
      *
@@ -66,12 +67,13 @@ class ProductAttrController extends Controller
     {
         //
         //dd(ProductAtrr);
+        $menu_active=$this->menu_active[0];
         $i=0;
         $attributes=ProductAttr::where('products_id',$id)->get();
         $product=Product::find($id);
         
      
-         return view('backend.products.addproductattribute',['product'=>$product,'attributes'=>$attributes,'i'=>$i]);
+         return view('backend.products.addproductattribute',['product'=>$product,'attributes'=>$attributes,'i'=>$i,'menu_active'=>$menu_active]);
          //return view('backend.roles.show',['role'=>$role]);
 
 

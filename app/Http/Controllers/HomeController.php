@@ -20,6 +20,7 @@ class HomeController extends Controller
         }
         
     	$categories=Category::latest()->paginate(5);
-    	return view('home',compact('title','products','categories'))->with('i',(request()->input('page',1)-1)*5);
+    	return view('frontend.home',compact('title','products','categories'))->with('i',(request()->input('page',1)-1)*5);
     }
+    
 }

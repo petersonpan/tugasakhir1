@@ -34,6 +34,7 @@
                     @foreach($errors->all() as $error)
                         <li>{{$error}}</li>
                     @endforeach
+                    <?php echo $menu_active; ?>
                 </ul>
             </div>
             @endif

@@ -5,6 +5,11 @@
  */
 
 require('./bootstrap');
+//require('./lightSlider');
+
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+
 
 window.Vue = require('vue').default;
 

@@ -52,7 +52,7 @@
 					</div>
 					<div class="form-group">
 						<label for="rolePermission">Add Permissions</label>
-						<input type="text" data-role="tagsinput" name="roles_permissions" id="roles_permissions" class="form-control"  value="{{ old('role_name') }}" >
+						<input type="text" data-role="tagsinput" name="roles_permissions" id="roles_permissions" class="form-control"  value="" >
 					</div>
 					<div class="form-group pt-2">
 				        <input class="btn btn-primary" type="submit" value="Submit">
@@ -64,16 +64,16 @@
 </section>
 @endsection
 @section("addon")
-   <script src='{{asset("js")}}/bootstrap-tagsinput.js'></script>
+  <script src='{{asset("js")}}/bootstrap-tagsinput.js'></script>
   <script type="text/javascript">
      $(document).ready(function(){
             $('#role_name').keyup(function(e){
+				e.preventDefault();
                 var str = $('#role_name').val();
                 str = str.replace(/\W+(?!$)/g, '-').toLowerCase();//rplace stapces with dash
                 $('#role_slug').val(str);
                 $('#role_slug').attr('placeholder', str);
             });
         });
-
   </script>
 @endsection

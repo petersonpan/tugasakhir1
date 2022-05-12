@@ -5,6 +5,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
+
 class CategoryController extends Controller
 {
 
@@ -73,7 +74,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $menu_active=$this->menu_active;    
+        $menu_active=$this->menu_active[0];    
         $categories=Category::find($id);
         return view('backend.categories.show',compact('categories','menu_active'));
     }

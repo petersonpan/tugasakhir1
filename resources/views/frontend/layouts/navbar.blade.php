@@ -10,32 +10,30 @@
 	        <a class="nav-link" href="{{url('/')}}">Home</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="">Products</a>
+	        <a class="nav-link" href="">About</a>
 	      </li>
-	      @guest
-	      <li class="nav-item">
-	        <a class="nav-link" href="{{url('login')}}">Login</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="{{url('register')}}">Register</a>
-	      </li>
+	      <li class="nav-item dropdown">
+	      	<a href="" class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account <i class="fa fa-caret-down"></i></a>
+	      @guest	      
+	      	<div class="dropdown-menu custdropdown" aria-labelledy="navbarDropdownMenuLink">
+	      		<a href="{{url('login')}}" class="dropdown-item">Login</a>
+	      		@if (Route::has('register'))
+	      			<a href="{{url('register')}}" class="dropdown-item">Register</a>
+	      		@endif
+	      	</div>
 	      @else
-	      <!-- <li class="nav-item">
-	        <a class="nav-link" href="">Add Post</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="">Manage Posts</a>
-	      </li> -->
-	      <li class="nav-item">
-	        <a class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="{{url('logout')}}">Logout</a>
-	      </li>
+	      <div class="dropdown-menu custdropdown" aria-labelledy="navbarDropdownMenuLink">
+	        <a class="dropdown-item" href="#">My Profile</a>
+	        <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="{{url('logout')}}">Logout</a>
+	      </div>
 	      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
         	</form>
-        	<li class="nav-item">
-	        <a class="nav-link" href="">{{ Auth::user()->name }}</a>
-	      </li>
 	      @endguest
+	      </li>
+	      <li class="nav-item">
+	      	<a class="nav-link" href="#">Cart</a>
+	      </li>
 	    </ul>
 	  </div>
 	</div>

@@ -67,4 +67,6 @@ class PermissionController extends Controller
 		
 		return redirect()->back();
     }
+
+	
 }

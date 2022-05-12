@@ -2,23 +2,23 @@
 @section('titlebackend',"show")
 @section('contentbackend')
 <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Show category</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('categories.index')}}">Dashboard</a></li>
-              @for($i=2;$i<=count(Request::segments())-1;$i++)
-              <li class="breadcrumb-item active">
-                  <a href="">{{Request::segment($i)}}</a>
-              </li>
-              @endfor
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Show category</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="{{route('categories.index')}}">Dashboard</a></li>
+          @for($i=2;$i<=count(Request::segments())-1;$i++)
+          <li class="breadcrumb-item active">
+              <a href="">{{Request::segment($i)}}</a>
+          </li>
+          @endfor
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
 </section>
 <section class="content">
      <div class="row">

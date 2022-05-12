@@ -108,7 +108,8 @@
                 <div class="col-md-6 col-sm-6">
                   <div class="form-group">
                     <label for="inputCode">Product Color</label>
-                    <input type="text" name="color" id="inputColor" class="form-control inputColor" autocomplete="off">
+                    <input type="color" name="color1" id="inputColor" class="form-control inputColor" autocomplete="off">
+                    <input type="hidden" name="color" id="inputColor2" class="form-control inputColor2">
                   </div>
                 </div>
               </div>
@@ -119,11 +120,10 @@
                         <input type="file" class="custom-file-input" id="exampleInputFile" name="postImage">
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                       </div>
-                    </div>
+                      </div>
                 </div>
               <div class="row">
                 <div class="col-12">
-
                   <a href="{{route('products.index')}}" class="btn btn-secondary float-right">Cancel</a>
                   <input type="hidden" name="userid" value="{{Session::get('adminData')->id}}">
                   <input type="submit" value="Save Changes" class="btn btn-success float-left">
@@ -138,8 +138,15 @@
 </section>
 @endsection
 @section("addon")
-  <script src='{{url("backend")}}/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'></script>
+  <!-- <script src='{{url("backend")}}/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'></script> -->
   <script type="text/javascript">
-    $('.inputColor').colorpicker();
+    //$('.inputColor').colorpicker();
+    var arry=[];
+    $('#inputColor').on('change',function(){
+       if( this.value && arry.indexOf(this.value) === -1 ){
+          arry.push(this.value);
+          $('#inputColor2').val(arry.join(', '));
+       }
+    });
   </script>
 @endsection("addon")

@@ -14,8 +14,9 @@ class RoleMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $role, $permission=null)
+    public function handle(Request $request, Closure $next,$role, $permission=null)
     {
+        //echo $role;
         if(!$request->user()->hasRole($role)){
             abort(404);
         }

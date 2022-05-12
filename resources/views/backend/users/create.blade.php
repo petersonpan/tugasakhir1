@@ -88,7 +88,7 @@
 
 
             $('#role').on('change', function() {
-                var role = $(this).find(':selected');    
+                var role = $(this).find(':selected');
                 var role_id = role.data('role-id');
                 var role_slug = role.data('role-slug');
 

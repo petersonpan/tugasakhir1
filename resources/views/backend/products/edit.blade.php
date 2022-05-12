@@ -1,6 +1,7 @@
 @extends('layoutbackend')
 @section('addoncss')
   <link rel="stylesheet" type="text/css" href="{{asset('backend')}}/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css?id=190274109270">
+  <link rel="stylesheet" type="text/css" href="{{asset('css')}}/bootstrap-tagsinput.css?id=90293270375">
 @endsection('addoncss')
 @section('titlebackend',"edit")
 @section('contentbackend')
@@ -51,10 +52,6 @@
                 <label for="inputDescription">Description</label>
                 <textarea id="inputDescription" name="description" class="form-control" rows="4">{{$product->description}}</textarea>
               </div>
-              <div class="form-group">
-                <label for="inputName">Product Price</label>
-                <input type="text" name="price" id="inputName" class="form-control" value="{{$product->price}}">
-              </div>
               <div class="row">
                 <div class="col-md-7 col-sm-6">
                   <div class="form-group">
@@ -66,7 +63,7 @@
                   <div class="form-group">
                     <label for="inputName">Product Satuan</label>
                     <select name="satuanid" id="satuanid" class="custom-select">
-                      <option value="">{{$prodsatuan->name}}</option>
+                      <option value="{{$prodsatuan->id}}">{{$prodsatuan->name}}</option>
                       @foreach($satuan as $ky)
                       <option value="{{$ky->id}}">{{$ky->name}}</option>
                       @endforeach
@@ -102,6 +99,7 @@
                 <div class="col-md-6 col-sm-6">
                   <div class="form-group">
                     <label for="inputCode">Product Color</label>
+                    <input type="color" name="color1" id="inputColor1" class="form-control inputColor1" autocomplete="off">
                     <input type="text" name="color" id="inputColor" class="form-control inputColor" value="{{$product->color}}" autocomplete="off">
                   </div>
                 </div>
@@ -116,7 +114,6 @@
                       </div>
                     </div>
                 </div>
-                
               <div class="row">
                 <div class="col-12">
                   <input type="hidden" name="userid" value="{{session('adminData')->id}}">
@@ -133,8 +130,21 @@
 </section>
 @endsection
 @section("addon")
+  <script src='{{asset("js")}}/bootstrap-tagsinput.js'></script>
   <script src='{{url("backend")}}/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'></script>
   <script type="text/javascript">
-    $('.inputColor').colorpicker();
+    $('#inputColor').tagsinput();
+    var str=document.getElementById('inputColor').value;
+    var arry=str.split(",");
+    $('#inputColor1').on('change',function(e){
+      console.log(this.value);
+       if( this.value && arry.indexOf(this.value) === -1 ){
+          arry.push(this.value);
+          console.log(arry);
+          $('#inputColor').val(arry.join(', '));
+          //$('#inputColor').tagsinput('refresh');
+          $('#inputColor').tagsinput('add',arry.join(', '));
+       }
+    });
   </script>
 @endsection("addon")

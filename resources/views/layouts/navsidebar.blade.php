@@ -56,7 +56,7 @@
 
           <li class="nav-item has-treeview {{$menu_active[0] == 'active' ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
+              <i class="nav-icon far fa-user"></i>
               <p>
                 User
                 <i class="fas fa-angle-left right"></i>

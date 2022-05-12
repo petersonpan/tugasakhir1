@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ImageModel;
+use App\Models\ProductAttr;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-	public $title=["index","create","edit","show"];
-
     public function index(Request $request){
-    	$title=$this->title[0];
     	
         if($request->has('q')){
             $q=$request('q');
@@ -18,9 +17,24 @@ class HomeController extends Controller
         }else{
             $products=Product::latest()->paginate(5);
         }
-        
     	$categories=Category::latest()->paginate(5);
-    	return view('frontend.home',compact('title','products','categories'))->with('i',(request()->input('page',1)-1)*5);
+    	return view('frontend.home',compact('products','categories'))->with('i',(request()->input('page',1)-1)*5);
     }
-    
+
+
+    public function ListByCat($id){
+        $productlist=Product::where('cat_id',$id)->get();
+        $bycategory=Category::select('name','parent_id')->where('id',$id)->get();
+        $getMainCat=Category::select('name')->where('id',$bycategory[0]->parent_id)->first();
+        return view('frontend.products',compact('productlist','getMainCat'));
+    }
+
+    public function productDetails($id){
+        $detail_product=Product::findOrFail($id);
+        $imagesGallery=Imagemodel::where('products_id',$id)->get();
+        $totalStock=ProductAttr::where('products_id',$id)->sum('stock');
+        $relateProducts=Product::where([['id','!=',$id],['cat_id',$detail_product->cat_id]])->get();
+        return view('frontend.product_detail')->with(compact('imagesGallery','detail_product'));
+    }
+
 }

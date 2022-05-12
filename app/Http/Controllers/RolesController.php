@@ -9,18 +9,21 @@ use App\Models\Permission;
 class RolesController extends Controller
 {
     //
+    public $menu_active=[0=>'menu_active',1=>'user'];
+
     public function index(){
         $i=0;
     	$roles=Role::orderBy('id','desc')->get();
-    	return view('backend.roles.index',['roles'=>$roles,'i'=>$i]);
+    	return view('backend.roles.index',['menu_active'=>$this->menu_active,'roles'=>$roles,'i'=>$i]);
     }
 
     public function create(){
-    	return view('backend.roles.create');
+    	return view('backend.roles.create',['menu_active'=>$this->menu_active]);
     }
 
     public function show(Role $role){
-    	return view('backend.roles.show',['role'=>$role]);
+        
+    	return view('backend.roles.show',['role'=>$role,'menu_active'=>$this->menu_active]);
     }
 
     public function store(Request $request){
@@ -50,7 +53,8 @@ class RolesController extends Controller
     }
 
     public function edit(Role $role){
-        return view('backend.roles.edit',['role'=>$role]);
+        $menu_active = $this->menu_active;
+        return view('backend.roles.edit',['role'=>$role,'menu_active'=>$menu_active]);
     }
 
     public function update(Request $request,Role $role){
@@ -59,7 +63,7 @@ class RolesController extends Controller
             'role_slug'=>'required|max:255'
         ]);
 
-        $role=new Role();
+        //$role=new Role();
         $role->name=$request->role_name;
         $role->slug=$request->role_slug;
         $role->save();
@@ -69,15 +73,15 @@ class RolesController extends Controller
 
         $listOfPermissions=explode(',',$request->roles_permissions);
 
-        foreach ($listOfPermissions as $permission) {
+        foreach($listOfPermissions as $permission) {
             $permissions=new Permission();
             $permissions->name=$permission;
-            $permissions->slug=strtolower(str_replace(" ", "-", $permission));
+            $permissions->slug=strtolower(str_replace(" ","-",$permission));
             $permissions->save();
             $role->permissions()->attach($permissions->id);
             $role->save();
         }
-        return redirect()->route('roles.index')->with('success','Post edit successfully');        
+        return redirect()->route('roles.index')->with('success','Post edit successfully');
     }
 
     public function destroy(Role $role){
@@ -86,5 +90,4 @@ class RolesController extends Controller
         $role->permissions()->detach();
         return redirect()->route('roles.index')->with('success','Post delete successfully');
     }
-
 }

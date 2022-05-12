@@ -71,6 +71,7 @@
             $('#role_name').keyup(function(e){
                 var str = $('#role_name').val();
                 str = str.replace(/\W+(?!$)/g, '-').toLowerCase();//rplace stapces with dash
+				console.log(str);
                 $('#role_slug').val(str);
                 $('#role_slug').attr('placeholder', str);
             });

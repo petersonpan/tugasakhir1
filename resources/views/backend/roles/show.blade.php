@@ -29,7 +29,13 @@
 				<div class="card-body">
 					<h5 class="card-title">Permissions</h5>
 		            <p class="card-text">
-		                ...........
+		                @if($role->permissions!=null)
+                            @foreach($role->permissions as $permission)
+                              <span class="badge badge-secondary">
+                                {{$permission->name}}
+                              </span>
+                            @endforeach
+                          @endif
 		            </p>
 				</div>
 				<div class="card-footer">

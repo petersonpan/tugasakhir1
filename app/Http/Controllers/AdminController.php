@@ -22,26 +22,14 @@ class AdminController extends Controller
 
     //submit_login
     public function submit_login(Request $request){
-    	// $request->validate([
-    	// 	'username' => 'required','password'=>'required'
-    	// ]);
         $request->validate([
             'email' => 'required','password'=>'required'
         ]);
 
-         // if(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'admin'=>'1'])){
-            //Session::put('adminData',$input_data['email']);
-        //     $request->session()->put('email',$request->email);
-        //     return redirect('admin/dashboard');
-        // }else{
-        //     return redirect('admin/login')->with('error','Account is not Valid!');
-        //}
-
 
     	$userCheck=Admin::where(['email'=>$request->email])->count();
-        //dd($userCheck);
     	if(($userCheck > 0)){
-    	   $adminData=Admin::where(['email'=>$request->email])->first();
+    	   $adminData=Admin::select('email','password')->where(['email'=>$request->email])->first();
            if(Hash::check($request->password,$adminData->password)){
                 $request->session()->put('adminData',$adminData);
                 return redirect('admin/dashboard'); 
@@ -53,7 +41,6 @@ class AdminController extends Controller
     	}
 
     }
-
 
 
     public function adminview(){
@@ -72,7 +59,6 @@ class AdminController extends Controller
     public function logout(){    
     		session()->forget([
     		'adminData']);
-            //Auth::logout();
     		return redirect('admin/login');
     }
 }

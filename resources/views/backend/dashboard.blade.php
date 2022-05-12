@@ -27,7 +27,6 @@
             <div class="small-box bg-info">
               <div class="inner">
                 <h3>{{\App\Models\Product::count()}}</h3>
-
                 <p>Products</p>
               </div>
               <div class="icon">
@@ -60,8 +59,8 @@
                 <h3 class="card-title">Product</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered">
+              <div class="card-body table-responsive">
+                <table class="table table-bordered text-nowrap">
                   <thead>                  
                     <tr>
                       <th style="width: 10px">#</th>
@@ -119,7 +118,7 @@
                 <h3 class="card-title">Product Category</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
+              <div class="card-body table-responsive">
                 <table class="table table-bordered">
                   <thead>
                     <tr>

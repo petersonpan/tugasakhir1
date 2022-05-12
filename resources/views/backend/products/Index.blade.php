@@ -33,7 +33,7 @@
                               </div>
                           </div>
                           <!-- /.card-header -->
-                          <div class="card-body">
+                          <div class="card-body table-responsive">
                             <table id="example1" class="table table-bordered">
                               <thead>
                                 <tr>
@@ -41,6 +41,7 @@
                                   <th>Name</th>
                                   <th>description</th>
                                   <th>Date Created</th>
+                                  <th>&nbsp;</th>
                                   <th>&nbsp;</th>
                                   <th>Actions</th>
                                 </tr>
@@ -53,7 +54,8 @@
                                             <td>{{$product->name}}</td>
                                             <td>{{$product->description}}</td>
                                             <td>{{date_format($product->created_at,'jS M Y')}}</td>
-                                            <td class="text-center"><a href="{{route('product_attr.show',$product->id)}}" class="btn btn-primary" title="add attibute product">add attibute product</a></td>
+                                            <td class="text-center"><a href="{{route('product_attr.show',$product->id)}}" class="btn btn-primary" title="add attibute product">add product attribute</a></td>
+                                            <td class="text-center"><a href="{{route('product-image.show',$product->id)}}" class="btn btn-danger" title="add attibute product">add product gallery</a></td>
                                             <td>
                                                 <form action="{{route('products.destroy',$product->id)}}" method="POST">
                             

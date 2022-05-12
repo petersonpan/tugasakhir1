@@ -2,11 +2,11 @@
 @section('fronttitle',"Home")
 @section('content')
     <div class="row">
-        <div class="col-md-8">
-            @include('frontend.maincontent')
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             @include('frontend.layouts.sidebar')
+        </div>
+        <div class="col-md-9">
+            @include('frontend.maincontent')
         </div>
     </div>
 @endsection('content')

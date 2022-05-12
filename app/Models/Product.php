@@ -18,15 +18,19 @@ class Product extends Model
     ];
 
     public function Category(){
-    	return $this->hasMany(Category::class,"cat_id","id");
+    	return $this->belongsTo(Category::class,"cat_id","id");
     }
 
     public function Satuan(){
         return $this->belongsTo(Satuan::class,"satuan_id","id");
     }
 
-    public function ProductAttr(){
-        return $this->hasOne(ProductAttr::class);
+    public function attributes(){
+        return $this->hasMany(ProductAttr::class,"products_id","id");
+    }
+
+    public function ImageModel(){
+        return $this->hasOne(ImageModel::class);
     }
 
 }

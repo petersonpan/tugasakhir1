@@ -69,11 +69,17 @@ class ProductController extends Controller
            $fileName=time().'-'.Str::slug($request->name,"-").'.'.$image1->getClientOriginalExtension();
            //directory file image thumb
            $destThumbnailSize=public_path('imgs/thumb');
+           $destThumbnailSmallSize=public_path('imgs/smallthumb');
            $destLargeSize=public_path('imgs/full');
            //$image1->move($dest1,$reThumbImage);
            Image::make($image1)->resize(300,300,function($constrain){
                 $constrain->aspectRatio();
+            })->save($destThumbnailSmallSize.'/'.$fileName);
+
+           Image::make($image1)->resize(150,150,function($constrain){
+                $constrain->aspectRatio();     
            })->save($destThumbnailSize.'/'.$fileName);
+
            Image::make($image1)->save($destLargeSize.'/'.$fileName);
         }else{
             $fileName='na';
@@ -150,29 +156,37 @@ class ProductController extends Controller
         ]);
         
         $formInput=$request->all();
-        if($formInput['PostImage'] != ''){
+
+        if($request->hasFile('PostImage') != ''){
             $pathfull=public_path().'/imgs/full/';
             $paththumb=public_path().'/imgs/thumb/';
+            $pathsmallthumb=public_path().'/imgs/smallthumb/';
 
-            if(file_exists(public_path('imgs/full/'.$prod->image)) && file_exists(public_path('imgs/thumb/'.$prod->image))){
+            if(file_exists(public_path('imgs/full/'.$prod->image)) && file_exists(public_path('imgs/thumb/'.$prod->image)) && file_exists(public_path('imgs/smallthumb/'.$prod->image))){
                 $patholdfull=$pathfull.$prod->image;
                 $patholdthumb=$paththumb.$prod->image;
+                $patholdsmallthumb=$pathsmallthumb.$prod->image;
                 unlink($patholdfull);
                 unlink($patholdthumb);
+                unlink($patholdsmallthumb);
 
                 // $file=$request->file();
                 // $fileName=time().'-'.Str::slug($formInput["name"],"-").$file->getClientOriginalExtension();  
                 // Image::make($file)->resize(300,300)->save($paththumb.$fileName);
                 // $file->move($pathfull,$fileName);
                 //dd('File is Exists ');
-            }
+            
+
                 $file=$formInput['PostImage'];
                 //dd($file);
                 $fileName=time().'-'.Str::slug($formInput["name"],"-").".".$file->getClientOriginalExtension();  
                 Image::make($file)->resize(300,300)->save($paththumb.$fileName);
+                Image::make($file)->resize(150,150)->save($pathsmallthumb.$fileName);
                 $file->move($pathfull,$fileName);
             
-
+            }
+        }else{
+            $fileName=$prod->image;
         }
 
         $prod->name=$request->name;
@@ -183,6 +197,7 @@ class ProductController extends Controller
         $prod->image=$fileName;
         $prod->description=$request->description;
         $prod->price=$request->price;
+        $prod->satuan_id=$request->satuanid;
         $prod->save();
 
         return redirect()->route('products.index')->with("success","Product updated successfully");
@@ -201,10 +216,12 @@ class ProductController extends Controller
         //dd($delete);
         $imgFull=public_path()."/imgs/full/".$delete->image;
         $imgThumb=public_path()."/imgs/thumb/".$delete->image;
+        $imgSmallThumb=public_path()."/imgs/smallthumb/".$delete->image;
         //dd($imgThumb);
         if($delete->delete()){
             unlink($imgFull);
             unlink($imgThumb);
+            unlink($imgSmallThumb);
         }
         return redirect()->route('products.index')->with("success","Product deleted successfully");
     }

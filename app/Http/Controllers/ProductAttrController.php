@@ -8,6 +8,22 @@ use Illuminate\Http\Request;
 
 class ProductAttrController extends Controller
 {
+    // public function generateOrderNR(){
+    //     $orderObj = Product::select('userid')->latest('id')->first();
+    //     if ($orderObj) {
+    //         $orderNr = $orderObj->name;
+    //         //echo $orderObj;
+    //         $removed1char = substr($orderNr, 1);
+    //         //echo $removed1char;
+    //         $generateOrder_nr = '#' . str_pad($removed1char + 1, 8, "0", STR_PAD_LEFT);
+    //         echo $generateOrder_nr;
+    //         exit();
+    //     } else {
+    //         $generateOrder_nr = '#' . str_pad(1, 8, "0", STR_PAD_LEFT);
+    //     }
+    //     return $generateOrder_nr;
+    // }
+
     public $menu_active=[0=>"products"];
     /**
      * Display a listing of the resource.
@@ -71,12 +87,11 @@ class ProductAttrController extends Controller
         $i=0;
         $attributes=ProductAttr::where('products_id',$id)->get();
         $product=Product::find($id);
-        
-     
-         return view('backend.products.addproductattribute',['product'=>$product,'attributes'=>$attributes,'i'=>$i,'menu_active'=>$menu_active]);
-         //return view('backend.roles.show',['role'=>$role]);
+        $lastSKUID=ProductAttr::OrderBy('id','desc')->first()->id;
+        $lastIncrement=substr($lastSKUID,-3);
+        $newOrderID='SKU'.date('Ymd').str_pad($lastIncrement + 1,3,0,STR_PAD_LEFT);
 
-
+        return view('backend.products.addproductattribute',['product'=>$product,'attributes'=>$attributes,'generatecode'=>$newOrderID,'i'=>$i,'menu_active'=>$menu_active]);
     }
 
     /**
@@ -97,9 +112,13 @@ class ProductAttrController extends Controller
      * @param  \App\Models\ProductAttr  $productAttr
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductAttr $productAttr)
+    public function update(Request $request, $id)
     {
-        //
+        $dataReq=$request->all();
+        foreach($dataReq['id'] as $key => $value){
+            $updateattribute=ProductAttr::where([['products_id',$id],['id',$dataReq['id'][$key]]])->update(['sku'=>$dataReq['sku'][$key],'size'=>$dataReq['size'][$key],'price'=>$dataReq['price'][$key],'stock'=>$dataReq['stock'][$key]]);
+        }
+        return back()->with('success','Update Attribute Successed');
     }
 
     /**
@@ -108,8 +127,16 @@ class ProductAttrController extends Controller
      * @param  \App\Models\ProductAttr  $productAttr
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductAttr $productAttr)
+    public function destroy(ProductAttr $productAttr,Request $request)
     {
         //
+        dd($productAttr);
+
+    }
+
+    public function deleteattr($id){
+        $delAttr=ProductAttr::findOrFail($id);
+        $delAttr->delete();
+        return back()->with('success','Delete Attribute Successed');
     }
 }

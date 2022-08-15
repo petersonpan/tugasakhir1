@@ -67,13 +67,13 @@
   <script src='{{asset("js")}}/bootstrap-tagsinput.js'></script>
   <script type="text/javascript">
      $(document).ready(function(){
-            $('#role_name').keyup(function(e){
-				e.preventDefault();
-                var str = $('#role_name').val();
-                str = str.replace(/\W+(?!$)/g, '-').toLowerCase();//rplace stapces with dash
-                $('#role_slug').val(str);
-                $('#role_slug').attr('placeholder', str);
-            });
+        $('#role_name').keyup(function(e){
+			e.preventDefault();
+            var str = $('#role_name').val();
+            str = str.replace(/\W+(?!$)/g, '-').toLowerCase();//rplace stapces with dash
+            $('#role_slug').val(str);
+            $('#role_slug').attr('placeholder', str);
+        });
         });
   </script>
 @endsection

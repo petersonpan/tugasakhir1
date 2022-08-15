@@ -14,6 +14,9 @@
     <div class="col-md-12 mb-4">
         <h2 class="title text-center">Features Product</h2>
     </div>
+    @if(session('unsuccessMessage'))
+    <div>{{session('unsuccessMessage')}}</div>
+    @else
     @foreach($products as $product)
         @if($product->category->status==1)
         <div class="col-md-3 col-sm-3">
@@ -32,4 +35,5 @@
         </div>
         @endif
     @endforeach
+    @endif
 </div>

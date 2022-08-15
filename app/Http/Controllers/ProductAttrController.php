@@ -8,21 +8,7 @@ use Illuminate\Http\Request;
 
 class ProductAttrController extends Controller
 {
-    // public function generateOrderNR(){
-    //     $orderObj = Product::select('userid')->latest('id')->first();
-    //     if ($orderObj) {
-    //         $orderNr = $orderObj->name;
-    //         //echo $orderObj;
-    //         $removed1char = substr($orderNr, 1);
-    //         //echo $removed1char;
-    //         $generateOrder_nr = '#' . str_pad($removed1char + 1, 8, "0", STR_PAD_LEFT);
-    //         echo $generateOrder_nr;
-    //         exit();
-    //     } else {
-    //         $generateOrder_nr = '#' . str_pad(1, 8, "0", STR_PAD_LEFT);
-    //     }
-    //     return $generateOrder_nr;
-    // }
+
 
     public $menu_active=[0=>"products"];
     /**

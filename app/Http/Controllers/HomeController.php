@@ -11,11 +11,20 @@ class HomeController extends Controller
 {
     public function index(Request $request){
     	
-        if($request->has('q')){
-            $q=$request('q');
-            $products=Product::where('name','like','%'.$q.'%')->orderBy('id','desc')->paginate(5);
-        }else{
-            $products=Product::latest()->paginate(5);
+        try {
+            if($request->has('q')){
+                $q=$request('q');
+                $products=Product::where('name','like','%'.$q.'%')->orderBy('id','desc')->paginate(5);
+            }else{
+                $products=Product::latest()->paginate(5);
+            }
+        } catch (\Exception $e) {
+            // if (!($e instanceof SQLException)) {
+            //     app()->make(\App\Exceptions\Handler::class)->report($e); // Report the exception if you don't know what actually caused it
+            // }
+            //     request()->session()->flash('unsuccessMessage', 'Failed to add comment !!!');
+            \Log::error($e);
+            return redirect()->back()->with(['unsuccessMessage' => 'There was an error']);
         }
     	$categories=Category::latest()->paginate(5);
     	return view('frontend.home',compact('products','categories'))->with('i',(request()->input('page',1)-1)*5);

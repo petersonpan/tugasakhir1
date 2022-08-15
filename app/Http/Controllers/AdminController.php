@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
 
+    public function __construct(){
+        //$this->middleware("isAdminLogged");
+    }
+
     public $menu_active=[0=>"active",1=>"admin"];
 
     public function login(){

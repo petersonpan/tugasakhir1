@@ -1,4 +1,6 @@
 <?php
+$seconds = 240;
+set_time_limit($seconds);
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;

@@ -67,7 +67,6 @@ class ProductAttrController extends Controller
      */
     public function show($id)
     {
-        //
         //dd(ProductAtrr);
         $menu_active=$this->menu_active[0];
         $i=0;

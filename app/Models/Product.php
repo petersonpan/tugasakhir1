@@ -9,13 +9,13 @@ class Product extends Model
 {
     use HasFactory;
     
-    public $timestamps=true;
+    //public $timestamps=true;
     // protected $casts=[
     //     'price' => 'float'
     // ];
-    protected $fillable=[
-        'cat_id','name','description','price','created_at'
-    ];
+    //protected $fillable=[
+        //'cat_id','name','description','price','created_at'
+    //];
 
     public function Category(){
     	return $this->belongsTo(Category::class,"cat_id","id");

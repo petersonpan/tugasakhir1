@@ -63,7 +63,7 @@ class RolesController extends Controller
             'role_slug'=>'required|max:255'
         ]);
 
-        //$role=new Role();
+        
         $role->name=$request->role_name;
         $role->slug=$request->role_slug;
         $role->save();

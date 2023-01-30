@@ -6,8 +6,7 @@
     </div>
     <div class="info">
       <a href="#" class="d-block">@if (Session::has('adminData')) 
-        {{session('adminData')->username}}
-
+        {{session('adminData')->email}}
       @endif
     </a>
     </div>

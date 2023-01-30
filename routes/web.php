@@ -20,7 +20,7 @@ use App\Http\Controllers\ImageProductController;
 */
 
 Route::get('/',[HomeController::class,'index']);
-Route::get('/admin',[App\Http\Controllers\AdminController::class,'login']);
+Route::get('/admin',[App\Http\Controllers\AdminController::class,'login'])->middleware('AlreadyLoggedIn');
 Route::get('/admin/login',[App\Http\Controllers\AdminController::class,'login'])->middleware('AlreadyLoggedIn');
 Route::post('/admin/login',[App\Http\Controllers\AdminController::class,'submit_login'])->name('adminauth.check');
 Route::get('/admin/logout',[App\Http\Controllers\AdminController::class,'logout']);
@@ -28,18 +28,18 @@ Route::get('/admin/logout',[App\Http\Controllers\AdminController::class,'logout'
 
 Route::prefix('admin')->middleware(['isAdminLogged'])->group(function(){
 	
-		Route::get('/dashboard',[App\Http\Controllers\AdminController::class,'dashboard']);
-		//Route::get('/user',[App\Http\Controllers\AdminController::class,'users']);
-		Route::get('/categories/jsonCat',[App\Http\Controllers\CategoryController::class,'jsonCategory']);
-		Route::resource("/categories", CategoryController::class);
-		Route::resource("/products", ProductController::class);
-		Route::resource("/roles", RolesController::class);
-		Route::get("/permissions",[App\Http\Controllers\PermissionController::class,'Permission']);
-		Route::resource("/user", UserController::class);
-		Route::get('/view',[App\Http\Controllers\AdminController::class,'adminview'])->name('admin.view');
-		Route::resource("/product_attr", ProductAttrController::class);
-		Route::resource('/product-image',ImageProductController::class);
-		Route::get('/product_attr/deleteattr/{id}',[App\Http\Controllers\ProductAttrController::class,'deleteattr'])->name('product_attr.deleteattr');
+	Route::get('/dashboard',[App\Http\Controllers\AdminController::class,'dashboard']);
+	//Route::get('/user',[App\Http\Controllers\AdminController::class,'users']);
+	Route::get('/categories/jsonCat',[App\Http\Controllers\CategoryController::class,'jsonCategory']);
+	Route::resource("/categories", CategoryController::class);
+	Route::resource("/products", ProductController::class);
+	Route::resource("/roles", RolesController::class);
+	Route::get("/permissions",[App\Http\Controllers\PermissionController::class,'Permission']);
+	Route::resource("/user", UserController::class);
+	Route::get('/view',[App\Http\Controllers\AdminController::class,'adminview'])->name('admin.view');
+	Route::resource("/product_attr", ProductAttrController::class);
+	Route::resource('/product-image',ImageProductController::class);
+	Route::get('/product_attr/deleteattr/{id}',[App\Http\Controllers\ProductAttrController::class,'deleteattr'])->name('product_attr.deleteattr');
 });
 
 

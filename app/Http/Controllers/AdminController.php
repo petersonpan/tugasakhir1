@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     	$userCheck=Admin::where(['email'=>$request->email])->count();
     	if(($userCheck > 0)){
-    	   $adminData=Admin::select('email','password')->where(['email'=>$request->email])->first();
+    	   $adminData=Admin::select('id','email','password')->where(['email'=>$request->email])->first();
            if(Hash::check($request->password,$adminData->password)){
                 $request->session()->put('adminData',$adminData);
                 return redirect('admin/dashboard'); 

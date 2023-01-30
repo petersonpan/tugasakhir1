@@ -138,8 +138,8 @@
 </section>
 @endsection
 @section("addon")
-  <!-- <script src='{{url("backend")}}/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'></script> -->
-  <script type="text/javascript">
+  <!-- <script src='{{url("backend")}}/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'></script>
+  --> <script type="text/javascript">
     //$('.inputColor').colorpicker();
     var arry=[];
     $('#inputColor').on('change',function(){

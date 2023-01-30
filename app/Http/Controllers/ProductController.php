@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Product as Product;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Admin;
 use App\Models\Satuan;
@@ -9,6 +9,7 @@ use Image;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 // use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -52,14 +53,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // dd($request);
+        // Log::error("Showing error post",$request);
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
             'code' => 'required',
             'category'=>'required',
-            'postImage' => 'required|mimes:jpg,jpeg,png|max:8000'            
+            'postImage' => 'required|mimes:jpg,jpeg,png|max:16000'            
         ]);
         //Product::create($request->all());
         //example post thumbnail //field=post_thumb
@@ -82,7 +84,7 @@ class ProductController extends Controller
 
            Image::make($image1)->save($destLargeSize.'/'.$fileName);
         }else{
-            $fileName='na';
+            $fileName="na";
         }
 
 

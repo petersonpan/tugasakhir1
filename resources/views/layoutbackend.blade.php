@@ -14,7 +14,7 @@
   <!-- Site wrapper -->
   <div class="wrapper">
     <!-- Navbar -->
-    @include('layouts.navbar')
+    @include('layouts.navbar')  
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -38,6 +38,9 @@
     <!-- /.content-wrapper -->
   </div>
   <!-- ./wrapper -->
+<script>
+  
+</script>
 @include('layouts.js')
 @stack('scripts')
 </body>

@@ -6,7 +6,12 @@
 
         <title>Laravel</title>
 
-        <!-- Fonts -->
+        <!-- Fonts
+
+        test_ter :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
+        git push -f https://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@github.com/petersonpan/tugasakhir1
+
+         -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->

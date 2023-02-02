@@ -14,7 +14,7 @@
   <!-- Site wrapper -->
   <div class="wrapper">
     <!-- Navbar -->
-    @include('layouts.navbar')  
+    @include('layouts.navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -37,6 +37,7 @@
     </div>
     <!-- /.content-wrapper -->
   </div>
+  @stack('modals')
   <!-- ./wrapper -->
 <script>
   

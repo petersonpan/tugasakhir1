@@ -1,14 +1,12 @@
 <div class="modal fade" id="modal-id">
 	<div class="modal-dialog">
-        <div class="modal-content">
-            
+        <div class="modal-content">            
             <div class="modal-header">
                 <h4 class="modal-title" id="userCrudModal"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
-
             <div class="modal-body">
-               <form action="{{route('product_attr.store')}}" method="POST" enctype="multipart/form-data" class="card-body">
+               <form action="" method="POST" enctype="multipart/form-data" class="card-body">
               <div class="form-group">
                 <label for="inputSKU">Product SKU</label>
                 <input type="text" name="sku" id="inputsku" class="form-control" value=""  autocomplete="off" placeholder="SKU" required>
@@ -35,7 +33,6 @@
             </form>
             <!-- /.card-body -->
             </div>
-
         </div>
     </div>
 </div>

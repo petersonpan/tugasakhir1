@@ -54,7 +54,8 @@
                                             <td>{{$product->name}}</td>
                                             <td>{{$product->description}}</td>
                                             <td>{{date_format($product->created_at,'jS M Y')}}</td>
-                                            <td class="text-center"><a href="{{route('product_attr.show',$product->id)}}" class="btn btn-primary" title="add attibute product">add product attribute</a></td>
+                                            <!-- <td class="text-center"><a href="{{route('product_attr.show',$product->id)}}" class="btn btn-primary" title="add attibute product">add product attribute</a></td> -->
+                                            <td class="text-center"><a  id="createProduct" class="btn btn-primary" title="add attibute product">add product attribute</a></td>
                                             <td class="text-center"><a href="{{route('product-image.show',$product->id)}}" class="btn btn-danger" title="add attibute product">add product gallery</a></td>
                                             <td>
                                                 <form action="{{route('products.destroy',$product->id)}}" method="POST">
@@ -86,6 +87,48 @@
             </div>
 {!! $products->links() !!}
         </div>
+@push('modals')
+<div class="modal fade" id="modal-id">
+  <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h4 class="modal-title" id="titleModal"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+               <form action="" method="POST" enctype="multipart/form-data" class="card-body">
+              <div class="form-group">
+                <label for="inputSKU">Product SKU</label>
+                <input type="text" name="sku" id="inputsku" class="form-control" value=""  autocomplete="off" placeholder="SKU" required>
+              </div>
+              <div class="form-group">
+                <label for="inputName">Product Size</label>
+                <input type="text" name="size" id="inputsize" class="form-control" value="{{old('size')}}" autocomplete="off" placeholder="input product size">
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">Product Price</label>
+                <input type="number" min="1000" name="price" id="inputprice" class="form-control" value="{{old('price')}}" autocomplete="off" placeholder="input product price" >
+              </div>
+              <div class="form-group">
+                <label for="inputStock">Product Stock</label>
+                <input type="number" name="stock" id="inputstock" class="form-control" value="{{old('stock')}}" autocomplete="off" placeholder="input product stock" min=0>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <a href="" class="btn btn-secondary">Cancel</a>
+                  <input type="hidden" name="productid" value="">
+                  <input type="submit" id="Submit" value="Save Changes" class="btn btn-success">
+                </div>
+              </div>
+            </form>
+            <!-- /.card-body -->
+            </div>
+
+        </div>
+    </div>
+</div>
+@endpush('modals')        
     </section>
 @endsection
 @push('scripts')
@@ -98,5 +141,11 @@
       "responsive": true,
       "autoWidth": false,
     });
+   $("body").on('click','#createProduct',function(e){
+      e.preventDefault();
+      $("#titleModal").html("Create Attribute Product");
+      $("#modal-id").modal();
+   });
+   $("body",on('click','#'))
 </script>
 @endpush

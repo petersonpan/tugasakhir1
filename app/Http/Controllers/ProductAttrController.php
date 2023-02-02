@@ -74,7 +74,7 @@ class ProductAttrController extends Controller
         $product=Product::find($id);
         $lastSKUID=ProductAttr::OrderBy('id','desc')->first()->id;
         $lastIncrement=substr($lastSKUID,-3);
-        $newOrderID='SKU'.date('Ymd').str_pad($lastIncrement + 1,3,0,STR_PAD_LEFT);
+        $newOrderID='SKU'.date('Ymd').str_pad($lastIncrement + 1,3,0,STR_PAD_LEFT);}
 
         return view('backend.products.addproductattribute',['product'=>$product,'attributes'=>$attributes,'generatecode'=>$newOrderID,'i'=>$i,'menu_active'=>$menu_active]);
     }

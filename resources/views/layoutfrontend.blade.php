@@ -18,7 +18,7 @@
 			@yield('content')
 		</main>
 	</div>
-<script src="{{ asset('js/app.js') }}" defer></script>
-@yield('frontendjs')	
+<!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+@yield('frontendjs')
 </body>
 </html>

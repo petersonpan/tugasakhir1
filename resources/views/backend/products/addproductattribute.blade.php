@@ -97,42 +97,42 @@
                   <form action="{{route('product_attr.update',$product->id)}}" method="POST" enctype="multipart/form-data">
                 {{method_field("PUT")}}
                   <table id="example1" class="table table-bordered">
-                                  <thead>
-                                    <tr>
-                                      <th style="width: 10px">#</th>
-                                      <th>SKU</th>
-                                      <th>Size</th>
-                                      <th>Price</th>
-                                      <th>Stock</th>
-                                      <th>Actions</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                     @if(count($attributes) > 0)
-                                        @foreach($attributes as $attribute)
-                                            <tr>
-                                                <td>{{++$i}}</td>
-                                                <td><input type="text" name="sku[]" id="idsku" class="form-control" value="{{$attribute->sku}}"  autocomplete="off" placeholder="SKU" required></td>
-                                                <td><input type="text" name="size[]" id="sizeid" class="form-control" value="{{$attribute->size}}"  autocomplete="off" placeholder="size" required="required"></td>
-                                                <td><input type="text" name="price[]" id="priceid" class="form-control" value="{{$attribute->price}}"  autocomplete="off" placeholder="price" required="required"></td>
-                                                <td><input type="text" name="stock[]" id="stockid" class="form-control" value="{{$attribute->stock}}"  autocomplete="off" placeholder="stock" required="required"></td>
-                                                <td>
-                                                  <input type="hidden" name="id[]" value="{{$attribute->id}}">
-                                                  <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                                  <input type="submit" value="Edit Changes" class="btn btn-success float-left">
-                                                  <a href="{{route('product_attr.deleteattr',$attribute->id)}}" rel="" rel1="delete-attribute" class="btn btn-danger btn-mini deleteRecord float-md-right">Delete</a>
-                                                </td>
+                    <thead>
+                      <tr>
+                        <th style="width: 10px">#</th>
+                        <th>SKU</th>
+                        <th>Size</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       @if(count($attributes) > 0)
+                          @foreach($attributes as $attribute)
+                              <tr>
+                                  <td>{{++$i}}</td>
+                                  <td><input type="text" name="sku[]" id="idsku" class="form-control" value="{{$attribute->sku}}"  autocomplete="off" placeholder="SKU" required></td>
+                                  <td><input type="text" name="size[]" id="sizeid" class="form-control" value="{{$attribute->size}}"  autocomplete="off" placeholder="size" required="required"></td>
+                                  <td><input type="text" name="price[]" id="priceid" class="form-control" value="{{$attribute->price}}"  autocomplete="off" placeholder="price" required="required"></td>
+                                  <td><input type="text" name="stock[]" id="stockid" class="form-control" value="{{$attribute->stock}}"  autocomplete="off" placeholder="stock" required="required"></td>
+                                  <td>
+                                    <input type="hidden" name="id[]" value="{{$attribute->id}}">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <input type="submit" value="Edit Changes" class="btn btn-success float-left">
+                                    <a href="{{route('product_attr.deleteattr',$attribute->id)}}" rel="" rel1="delete-attribute" class="btn btn-danger btn-mini deleteRecord float-md-right">Delete</a>
+                                  </td>
 
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <tr>
-                                            <td colspan="6" class="text-center">EOD</td>
-                                        </tr>
-                                    @endif             
-                                  </tbody>
-                          </table>
-                        </form>
+                              </tr>
+                          @endforeach
+                      @else
+                          <tr>
+                              <td colspan="6" class="text-center">EOD</td>
+                          </tr>
+                      @endif             
+                    </tbody>
+                   </table>
+                  </form>
                 </div>
               <!-- /.card-body -->
               </div>
